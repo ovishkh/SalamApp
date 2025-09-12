@@ -25,28 +25,48 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
 
   useEffect(() => {
     fetchPrayerTimes();
+  }, [location]);
+
+  useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
       updateTimeLeft();
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [location]);
-
-  useEffect(() => {
-    fetchPrayerTimes();
-  }, [location]);
+  }, [prayerTimesData]);
 
   const fetchPrayerTimes = async () => {
     try {
       setLoading(true);
       const response = await fetch(`/api/prayer-times?city=${location.name}&country=${location.country}&lat=${location.coordinates.lat}&lng=${location.coordinates.lng}`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
+      
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      
       setPrayerTimesData(data);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching prayer times:', error);
       setLoading(false);
+      // Set fallback prayer times
+      setPrayerTimesData({
+        fajr: '04:28',
+        dhuhr: '11:56',
+        asr: '16:21',
+        maghrib: '18:05',
+        isha: '19:21',
+        location: `${location.name}, ${location.country}`,
+        date: new Date().toISOString().split('T')[0],
+        hijriDate: '12 Muharram 1447 AH'
+      });
     }
   };
 
@@ -54,18 +74,36 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
     if (!prayerTimesData) return;
 
     const now = new Date();
+    const today = now.toDateString();
+    
     const prayers = [
-      { name: 'Fajr', time: new Date(`${now.toDateString()} ${prayerTimesData.fajr}`) },
-      { name: 'Dhuhr', time: new Date(`${now.toDateString()} ${prayerTimesData.dhuhr}`) },
-      { name: 'Asr', time: new Date(`${now.toDateString()} ${prayerTimesData.asr}`) },
-      { name: 'Maghrib', time: new Date(`${now.toDateString()} ${prayerTimesData.maghrib}`) },
-      { name: 'Isha', time: new Date(`${now.toDateString()} ${prayerTimesData.isha}`) },
+      { name: 'Fajr', time: new Date(`${today} ${prayerTimesData.fajr}`) },
+      { name: 'Dhuhr', time: new Date(`${today} ${prayerTimesData.dhuhr}`) },
+      { name: 'Asr', time: new Date(`${today} ${prayerTimesData.asr}`) },
+      { name: 'Maghrib', time: new Date(`${today} ${prayerTimesData.maghrib}`) },
+      { name: 'Isha', time: new Date(`${today} ${prayerTimesData.isha}`) },
     ];
 
-    const nextPrayer = prayers.find(prayer => prayer.time > now) || prayers[0];
-    const timeDiff = nextPrayer.time.getTime() - now.getTime();
-    
-    if (timeDiff > 0) {
+    // Find the next prayer time
+    const nextPrayer = prayers.find(prayer => prayer.time > now);
+    if (nextPrayer) {
+      const timeDiff = nextPrayer.time.getTime() - now.getTime();
+      if (timeDiff > 0) {
+        const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+        
+        setTimeLeft({ hours, minutes, seconds, totalMinutes: Math.floor(timeDiff / (1000 * 60)) });
+      }
+    } else {
+      // If no prayer found for today, use first prayer of next day
+      const tomorrow = new Date(now);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const tomorrowStr = tomorrow.toDateString();
+      
+      const firstPrayerTomorrow = new Date(`${tomorrowStr} ${prayerTimesData.fajr}`);
+      const timeDiff = firstPrayerTomorrow.getTime() - now.getTime();
+      
       const hours = Math.floor(timeDiff / (1000 * 60 * 60));
       const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
@@ -101,35 +139,39 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
     );
   }
 
+  const getCurrentPrayer = () => {
+    if (!prayerTimesData) return null;
+    
+    const now = new Date();
+    const today = now.toDateString();
+    
+    const prayers = [
+      { name: 'Fajr', time: new Date(`${today} ${prayerTimesData.fajr}`) },
+      { name: 'Dhuhr', time: new Date(`${today} ${prayerTimesData.dhuhr}`) },
+      { name: 'Asr', time: new Date(`${today} ${prayerTimesData.asr}`) },
+      { name: 'Maghrib', time: new Date(`${today} ${prayerTimesData.maghrib}`) },
+      { name: 'Isha', time: new Date(`${today} ${prayerTimesData.isha}`) },
+    ];
+
+    // Find current prayer (the one that just passed or is currently active)
+    const currentPrayer = prayers.find((prayer, index) => {
+      const nextPrayer = prayers[index + 1];
+      return prayer.time <= now && (!nextPrayer || nextPrayer.time > now);
+    });
+
+    return currentPrayer?.name || 'Fajr';
+  };
+
   const prayerTimes: PrayerTime[] = [
-    { name: 'Fajr', time: prayerTimesData.fajr, isCurrent: false },
-    { name: 'Dhuhr', time: prayerTimesData.dhuhr, isCurrent: false },
-    { name: 'Asr', time: prayerTimesData.asr, isCurrent: false },
-    { name: 'Maghrib', time: prayerTimesData.maghrib, isCurrent: true },
-    { name: 'Isha', time: prayerTimesData.isha, isCurrent: false },
+    { name: 'Fajr', time: prayerTimesData.fajr, isCurrent: getCurrentPrayer() === 'Fajr' },
+    { name: 'Dhuhr', time: prayerTimesData.dhuhr, isCurrent: getCurrentPrayer() === 'Dhuhr' },
+    { name: 'Asr', time: prayerTimesData.asr, isCurrent: getCurrentPrayer() === 'Asr' },
+    { name: 'Maghrib', time: prayerTimesData.maghrib, isCurrent: getCurrentPrayer() === 'Maghrib' },
+    { name: 'Isha', time: prayerTimesData.isha, isCurrent: getCurrentPrayer() === 'Isha' },
   ];
 
   const currentPrayer = prayerTimes.find(prayer => prayer.isCurrent);
   const nextPrayer = prayerTimes.find(prayer => prayer.isNext);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-      // Update time left logic here
-      setTimeLeft(prev => {
-        if (prev.seconds > 0) {
-          return { ...prev, seconds: prev.seconds - 1 };
-        } else if (prev.minutes > 0) {
-          return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
-        } else if (prev.hours > 0) {
-          return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        }
-        return prev;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
 
   const formatTimeLeft = (timeLeft: TimeLeft) => {
     const { hours, minutes, seconds } = timeLeft;

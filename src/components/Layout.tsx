@@ -24,9 +24,13 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage = 'home' }) => {
   const getHijriDate = async () => {
     try {
       const response = await fetch('/api/hijri-date');
-      const data = await response.json();
-      if (data.hijriDate) {
-        setHijriDate(data.hijriDate);
+      if (response.ok) {
+        const data = await response.json();
+        if (data.hijriDate) {
+          setHijriDate(data.hijriDate);
+        }
+      } else {
+        throw new Error('Failed to fetch Hijri date');
       }
     } catch (error) {
       console.log('Hijri date not available, using fallback');
