@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Home, BarChart3, BookOpen, User, Settings } from 'lucide-react';
 
 interface LayoutProps {
@@ -7,20 +7,48 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, currentPage = 'home' }) => {
-  const currentTime = new Date().toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [hijriDate, setHijriDate] = useState('');
 
-  const currentDate = new Date().toLocaleDateString('en-US', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  });
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
 
-  const batteryLevel = 54;
-  const signalStrength = 3;
+    // Get Hijri date (we'll implement this with an API)
+    getHijriDate();
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const getHijriDate = async () => {
+    try {
+      const response = await fetch('/api/hijri-date');
+      const data = await response.json();
+      if (data.hijriDate) {
+        setHijriDate(data.hijriDate);
+      }
+    } catch (error) {
+      console.log('Hijri date not available, using fallback');
+      setHijriDate('12 Muharram 1447 AH'); // Fallback date
+    }
+  };
+
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+  };
+
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString('en-US', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
+  };
 
   const navigationItems = [
     { id: 'home', icon: Home, label: 'Home' },
@@ -34,41 +62,15 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage = 'home' }) => {
     <div className="min-h-screen bg-gradient-dark text-white">
       {/* Status Bar */}
       <div className="flex justify-between items-center px-4 py-2 text-sm">
-        <span className="font-medium">{currentTime}</span>
-        <div className="flex items-center space-x-2">
-          {/* Signal Strength */}
-          <div className="flex space-x-1">
-            {[...Array(4)].map((_, i) => (
-              <div
-                key={i}
-                className={`w-1 h-3 rounded-sm ${
-                  i < signalStrength ? 'bg-white' : 'bg-gray-500'
-                }`}
-              />
-            ))}
-          </div>
-          {/* WiFi Icon */}
-          <div className="w-4 h-4">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.07 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z" />
-            </svg>
-          </div>
-          {/* Battery */}
-          <div className="flex items-center space-x-1">
-            <div className="w-6 h-3 border border-white rounded-sm">
-              <div
-                className="h-full bg-white rounded-sm"
-                style={{ width: `${batteryLevel}%` }}
-              />
-            </div>
-            <span className="text-xs">{batteryLevel}%</span>
-          </div>
+        <span className="font-medium">{formatTime(currentTime)}</span>
+        <div className="text-xs text-gray-300">
+          {hijriDate || 'Loading...'}
         </div>
       </div>
 
       {/* Header */}
       <div className="flex justify-between items-center px-4 py-2 text-sm">
-        <span className="text-gray-300">{currentDate}</span>
+        <span className="text-gray-300">{formatDate(currentTime)}</span>
         <span className="text-gray-300">Dhaka</span>
       </div>
 

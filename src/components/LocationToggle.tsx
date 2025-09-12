@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { MapPin, ChevronDown } from 'lucide-react';
 import { Location } from '../types';
 
-const LocationToggle: React.FC = () => {
+interface LocationToggleProps {
+  onLocationChange: (location: Location) => void;
+}
+
+const LocationToggle: React.FC<LocationToggleProps> = ({ onLocationChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState<Location>({
     name: 'Dhaka',
@@ -23,7 +27,7 @@ const LocationToggle: React.FC = () => {
   const handleLocationSelect = (location: Location) => {
     setSelectedLocation(location);
     setIsOpen(false);
-    // Here you would typically update prayer times based on the new location
+    onLocationChange(location);
   };
 
   return (
