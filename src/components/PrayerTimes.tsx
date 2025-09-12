@@ -122,8 +122,8 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
   if (loading) {
     return (
       <div className="px-4 py-6">
-        <div className="bg-gradient-card rounded-2xl p-6 text-center">
-          <div className="animate-pulse">Loading prayer times...</div>
+        <div className="gradient-card rounded-2xl p-6 text-center islamic-shadow">
+          <div className="animate-pulse text-islamic-gold-300">Loading prayer times...</div>
         </div>
       </div>
     );
@@ -132,7 +132,7 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
   if (!prayerTimesData) {
     return (
       <div className="px-4 py-6">
-        <div className="bg-gradient-card rounded-2xl p-6 text-center">
+        <div className="gradient-card rounded-2xl p-6 text-center islamic-shadow">
           <div className="text-red-400">Failed to load prayer times</div>
         </div>
       </div>
@@ -194,30 +194,30 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
   return (
     <div className="px-4 py-6">
       {/* Current Prayer Section */}
-      <div className="bg-gradient-card rounded-2xl p-6 mb-6">
+      <div className="gradient-card rounded-2xl p-6 mb-6 islamic-shadow geometric-pattern">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-2">
-            <Bell className="w-5 h-5 text-primary-400" />
-            <span className="text-sm text-gray-300">Now :</span>
-            <span className="text-lg font-semibold text-white">
+            <Bell className="w-5 h-5 text-islamic-gold-400 golden-glow" />
+            <span className="text-sm text-islamic-gold-200">Now :</span>
+            <span className="text-lg font-semibold text-white islamic-title">
               {currentPrayer?.name}
             </span>
-            <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+            <div className="w-2 h-2 bg-islamic-green-400 rounded-full green-glow"></div>
           </div>
         </div>
 
         <div className="flex justify-between items-start mb-4">
           <div className="space-y-2">
-            <div className="text-2xl font-bold text-white">
+            <div className="text-2xl font-bold text-white islamic-title">
               {currentPrayer?.time} (Start time)
             </div>
-            <div className="text-sm text-gray-300">
+            <div className="text-sm text-islamic-gold-200">
               {formatTimeLeft(timeLeft)}
             </div>
-            <div className="text-sm text-gray-300">
+            <div className="text-sm text-islamic-gold-200">
               Suhur: 4:27 AM
             </div>
-            <div className="text-sm text-gray-300">
+            <div className="text-sm text-islamic-gold-200">
               Iftar: 6:05 PM
             </div>
           </div>
@@ -233,7 +233,7 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
                 stroke="currentColor"
                 strokeWidth="8"
                 fill="none"
-                className="text-gray-700"
+                className="text-islamic-deep-700"
               />
               {/* Progress circle */}
               <circle
@@ -245,32 +245,32 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
                 fill="none"
                 strokeDasharray={`${2 * Math.PI * 40}`}
                 strokeDashoffset={`${2 * Math.PI * 40 * (1 - calculateProgress() / 100)}`}
-                className="text-white"
+                className="text-islamic-gold-400"
                 strokeLinecap="round"
               />
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <div className="text-xs text-gray-400">Time</div>
-              <div className="text-sm font-bold text-white">
+              <div className="text-xs text-islamic-gold-300">Time</div>
+              <div className="text-sm font-bold text-white islamic-title">
                 {formatTimeDisplay(timeLeft)}
               </div>
-              <div className="text-xs text-gray-400">Left</div>
+              <div className="text-xs text-islamic-gold-300">Left</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Prayer Times List */}
-      <div className="bg-gradient-card rounded-2xl p-4 mb-6">
+      <div className="gradient-card rounded-2xl p-4 mb-6 islamic-shadow">
         <div className="flex justify-between items-center">
           {prayerTimes.map((prayer, index) => (
             <div key={prayer.name} className="flex flex-col items-center space-y-2">
               <div className={`w-2 h-2 rounded-full ${
-                prayer.isCurrent ? 'bg-white' : 'bg-gray-500'
+                prayer.isCurrent ? 'bg-islamic-gold-400 golden-glow' : 'bg-islamic-deep-500'
               }`} />
               <div className="text-center">
-                <div className="text-xs text-gray-300">{prayer.name}</div>
-                <div className="text-sm font-semibold text-white">{prayer.time}</div>
+                <div className="text-xs text-islamic-gold-200">{prayer.name}</div>
+                <div className="text-sm font-semibold text-white islamic-title">{prayer.time}</div>
               </div>
             </div>
           ))}

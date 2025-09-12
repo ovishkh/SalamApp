@@ -58,12 +58,12 @@ const FeatureGrid: React.FC = () => {
           return (
             <button
               key={feature.id}
-              className="flex flex-col items-center space-y-2 p-4 bg-gradient-card rounded-2xl hover:bg-opacity-80 transition-all duration-200"
+              className="flex flex-col items-center space-y-2 p-4 gradient-card rounded-2xl hover:bg-opacity-80 transition-all duration-300 islamic-shadow hover:golden-glow group"
             >
-              <div className="w-12 h-12 bg-primary-500 rounded-full flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-islamic-green-600 to-islamic-green-700 rounded-full flex items-center justify-center group-hover:from-islamic-gold-500 group-hover:to-islamic-gold-600 transition-all duration-300">
                 <IconComponent className="w-6 h-6 text-white" />
               </div>
-              <span className="text-xs text-center text-gray-300 font-medium">
+              <span className="text-xs text-center text-islamic-gold-200 font-medium group-hover:text-white transition-colors duration-300">
                 {feature.name}
               </span>
             </button>

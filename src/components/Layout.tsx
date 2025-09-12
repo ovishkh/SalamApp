@@ -63,19 +63,19 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage = 'home' }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-dark text-white">
+    <div className="min-h-screen bg-gradient-dark text-white islamic-pattern">
       {/* Status Bar */}
-      <div className="flex justify-between items-center px-4 py-2 text-sm">
-        <span className="font-medium">{formatTime(currentTime)}</span>
-        <div className="text-xs text-gray-300">
+      <div className="flex justify-between items-center px-4 py-3 text-sm bg-gradient-to-r from-islamic-deep-900/50 to-islamic-blue-900/50 backdrop-blur-sm border-b border-islamic-gold-500/20">
+        <span className="font-medium text-islamic-gold-300">{formatTime(currentTime)}</span>
+        <div className="text-xs text-islamic-gold-200 arabic-text">
           {hijriDate || 'Loading...'}
         </div>
       </div>
 
       {/* Header */}
-      <div className="flex justify-between items-center px-4 py-2 text-sm">
-        <span className="text-gray-300">{formatDate(currentTime)}</span>
-        <span className="text-gray-300">Dhaka</span>
+      <div className="flex justify-between items-center px-4 py-3 text-sm bg-gradient-to-r from-islamic-green-900/30 to-islamic-blue-900/30 backdrop-blur-sm border-b border-islamic-green-500/20">
+        <span className="text-islamic-gold-200">{formatDate(currentTime)}</span>
+        <span className="text-islamic-gold-200 font-medium">Dhaka</span>
       </div>
 
       {/* Main Content */}
@@ -84,8 +84,8 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage = 'home' }) => {
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-dark-800 border-t border-dark-700">
-        <div className="flex justify-around py-2">
+      <nav className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-islamic-deep-900 to-islamic-blue-900/80 backdrop-blur-lg border-t border-islamic-gold-500/30 islamic-shadow">
+        <div className="flex justify-around py-3">
           {navigationItems.map((item) => {
             const Icon = item.icon;
             const isActive = currentPage === item.id;
@@ -93,8 +93,10 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage = 'home' }) => {
             return (
               <button
                 key={item.id}
-                className={`flex flex-col items-center space-y-1 py-2 px-3 ${
-                  isActive ? 'text-primary-400' : 'text-gray-400'
+                className={`flex flex-col items-center space-y-1 py-2 px-3 rounded-lg transition-all duration-300 ${
+                  isActive 
+                    ? 'text-islamic-gold-300 golden-glow bg-islamic-green-800/30' 
+                    : 'text-islamic-gold-200 hover:text-islamic-gold-300 hover:bg-islamic-green-800/20'
                 }`}
               >
                 <Icon size={20} />

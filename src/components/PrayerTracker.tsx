@@ -28,18 +28,18 @@ const PrayerTracker: React.FC = () => {
 
   return (
     <div className="px-4 mb-6">
-      <div className="bg-gradient-card rounded-2xl p-6">
-        <h2 className="text-lg font-semibold text-white mb-4">Prayer Tracker</h2>
+      <div className="gradient-card rounded-2xl p-6 islamic-shadow">
+        <h2 className="text-lg font-semibold text-white mb-4 islamic-title">Prayer Tracker</h2>
         
         <div className="flex space-x-2 overflow-x-auto pb-2">
           {prayers.map((prayer) => (
             <button
               key={prayer.key}
               onClick={() => togglePrayer(prayer.key)}
-              className={`flex items-center space-x-2 px-4 py-3 rounded-full whitespace-nowrap transition-all duration-200 ${
+              className={`flex items-center space-x-2 px-4 py-3 rounded-full whitespace-nowrap transition-all duration-300 ${
                 tracker[prayer.key]
-                  ? 'bg-green-500 text-white'
-                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  ? 'bg-gradient-to-r from-islamic-green-600 to-islamic-green-700 text-white green-glow'
+                  : 'bg-gradient-to-r from-islamic-deep-700 to-islamic-deep-800 text-islamic-gold-200 hover:from-islamic-deep-600 hover:to-islamic-deep-700 hover:text-white'
               }`}
             >
               {tracker[prayer.key] ? (

@@ -35,33 +35,33 @@ const LocationToggle: React.FC<LocationToggleProps> = ({ onLocationChange }) => 
       <div className="relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center justify-between w-full bg-gradient-card rounded-xl p-3 hover:bg-opacity-80 transition-all duration-200"
+          className="flex items-center justify-between w-full gradient-card rounded-xl p-3 hover:bg-opacity-80 transition-all duration-300 islamic-shadow hover:golden-glow"
         >
           <div className="flex items-center space-x-2">
-            <MapPin className="w-4 h-4 text-primary-400" />
-            <span className="text-white font-medium">{selectedLocation.name}</span>
-            <span className="text-gray-400 text-sm">({selectedLocation.country})</span>
+            <MapPin className="w-4 h-4 text-islamic-gold-400" />
+            <span className="text-white font-medium islamic-title">{selectedLocation.name}</span>
+            <span className="text-islamic-gold-200 text-sm">({selectedLocation.country})</span>
           </div>
-          <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+          <ChevronDown className={`w-4 h-4 text-islamic-gold-300 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
         </button>
 
         {isOpen && (
-          <div className="absolute top-full left-0 right-0 mt-2 bg-dark-800 rounded-xl border border-dark-700 shadow-lg z-50 max-h-60 overflow-y-auto">
+          <div className="absolute top-full left-0 right-0 mt-2 bg-gradient-to-b from-islamic-deep-900 to-islamic-blue-900 rounded-xl border border-islamic-gold-500/30 shadow-lg z-50 max-h-60 overflow-y-auto islamic-shadow">
             {locations.map((location) => (
               <button
                 key={`${location.name}-${location.country}`}
                 onClick={() => handleLocationSelect(location)}
-                className={`w-full text-left px-4 py-3 hover:bg-dark-700 transition-colors duration-200 ${
-                  selectedLocation.name === location.name ? 'bg-primary-500 bg-opacity-20' : ''
+                className={`w-full text-left px-4 py-3 hover:bg-islamic-green-800/20 transition-colors duration-300 ${
+                  selectedLocation.name === location.name ? 'bg-islamic-green-800/30' : ''
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-white font-medium">{location.name}</div>
-                    <div className="text-gray-400 text-sm">{location.country}</div>
+                    <div className="text-white font-medium islamic-title">{location.name}</div>
+                    <div className="text-islamic-gold-200 text-sm">{location.country}</div>
                   </div>
                   {selectedLocation.name === location.name && (
-                    <div className="w-2 h-2 bg-primary-400 rounded-full"></div>
+                    <div className="w-2 h-2 bg-islamic-gold-400 rounded-full golden-glow"></div>
                   )}
                 </div>
               </button>

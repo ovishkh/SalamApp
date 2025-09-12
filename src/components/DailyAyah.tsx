@@ -11,19 +11,19 @@ const DailyAyah: React.FC = () => {
 
   return (
     <div className="px-4 mb-6">
-      <div className="bg-gradient-card rounded-2xl p-6">
+      <div className="gradient-card rounded-2xl p-6 islamic-shadow geometric-pattern">
         <div className="flex items-start space-x-4">
           <div className="flex-shrink-0">
-            <Quote className="w-8 h-8 text-primary-400" />
+            <Quote className="w-8 h-8 text-islamic-gold-400 golden-glow" />
           </div>
           
           <div className="flex-1">
-            <h3 className="text-lg font-semibold text-white mb-2">Daily Ayah</h3>
-            <p className="text-gray-300 text-sm leading-relaxed mb-3">
+            <h3 className="text-lg font-semibold text-white mb-2 islamic-title">Daily Ayah</h3>
+            <p className="text-islamic-gold-200 text-sm leading-relaxed mb-3">
               {dailyAyah.text}
             </p>
             <div className="text-right">
-              <span className="text-primary-400 text-sm font-medium">
+              <span className="text-islamic-gold-400 text-sm font-medium arabic-text">
                 {dailyAyah.reference}
               </span>
             </div>
