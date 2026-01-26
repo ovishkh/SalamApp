@@ -66,27 +66,27 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage = 'home' }) => {
     <div className="min-h-screen bg-gradient-dark text-white islamic-pattern font-sans">
       {/* Status Bar */}
       <div className="sticky top-0 z-50">
-        <div className="flex justify-between items-center px-6 py-2 text-xs bg-islamic-deep-900/80 backdrop-blur-md border-b border-islamic-gold-500/10">
+        <div className="flex justify-between items-center px-6 py-2 text-xs bg-islamic-deep-950/80 backdrop-blur-md border-b border-islamic-teal-500/10">
           <div className="flex items-center space-x-2">
-            <span className="w-2 h-2 rounded-full bg-islamic-green-500 animate-pulse" />
-            <span className="font-semibold text-islamic-gold-200 tracking-wider transition-all duration-500 group-hover:text-white">
+            <span className="w-2 h-2 rounded-full bg-islamic-teal-500 animate-pulse" />
+            <span className="font-semibold text-islamic-teal-300 tracking-wider transition-all duration-500 group-hover:text-white">
               {formatTime(currentTime)}
             </span>
           </div>
-          <div className="text-sm font-arabic text-islamic-gold-300">
+          <div className="text-sm font-arabic text-islamic-teal-300">
             {hijriDate || 'Loading...'}
           </div>
         </div>
 
         {/* Header */}
-        <div className="flex justify-between items-center px-6 py-4 bg-islamic-deep-900/40 backdrop-blur-sm border-b border-white/5">
+        <div className="flex justify-between items-center px-6 py-4 bg-islamic-deep-950/40 backdrop-blur-sm border-b border-white/5">
           <div className="flex flex-col">
-            <span className="text-[10px] uppercase tracking-[0.2em] text-islamic-gold-500/80 font-bold">Current Date</span>
-            <span className="text-sm text-islamic-gold-100 font-medium">{formatDate(currentTime)}</span>
+            <span className="text-[10px] uppercase tracking-[0.2em] text-islamic-teal-500/80 font-bold">Current Date</span>
+            <span className="text-sm text-islamic-teal-100 font-medium">{formatDate(currentTime)}</span>
           </div>
           <div className="flex flex-col items-end">
-            <span className="text-[10px] uppercase tracking-[0.2em] text-islamic-gold-500/80 font-bold">Location</span>
-            <span className="text-sm text-islamic-gold-100 font-medium">Dhaka, BD</span>
+            <span className="text-[10px] uppercase tracking-[0.2em] text-islamic-teal-500/80 font-bold">Location</span>
+            <span className="text-sm text-islamic-teal-100 font-medium">Dhaka, BD</span>
           </div>
         </div>
       </div>
@@ -103,23 +103,22 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage = 'home' }) => {
             {navigationItems.map((item) => {
               const Icon = item.icon;
               const isActive = currentPage === item.id;
-              
+
               return (
                 <button
                   key={item.id}
-                  className={`relative flex flex-col items-center py-2 px-4 rounded-xl transition-all duration-300 ${
-                    isActive 
-                      ? 'text-islamic-gold-300' 
-                      : 'text-gray-400 hover:text-islamic-gold-200 hover:bg-white/5'
-                  }`}
+                  className={`relative flex flex-col items-center py-2 px-4 rounded-xl transition-all duration-300 ${isActive
+                      ? 'text-islamic-teal-300'
+                      : 'text-gray-500 hover:text-islamic-teal-200 hover:bg-white/5'
+                    }`}
                 >
                   {isActive && (
-                    <span className="absolute inset-0 bg-islamic-gold-500/10 rounded-xl blur-sm" />
+                    <span className="absolute inset-0 bg-islamic-teal-500/10 rounded-xl blur-sm" />
                   )}
                   <Icon size={20} className={`relative z-10 transition-transform duration-300 ${isActive ? 'scale-110' : 'scale-100'}`} />
                   <span className="relative z-10 text-[10px] font-bold mt-1 uppercase tracking-wider">{item.label}</span>
                   {isActive && (
-                    <span className="absolute -bottom-1 w-1 h-1 bg-islamic-gold-400 rounded-full shadow-[0_0_8px_rgba(212,175,55,0.8)]" />
+                    <span className="absolute -bottom-1 w-1 h-1 bg-islamic-teal-400 rounded-full shadow-[0_0_8px_rgba(20,184,166,0.8)]" />
                   )}
                 </button>
               );

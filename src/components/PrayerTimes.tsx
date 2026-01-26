@@ -196,27 +196,27 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
       {/* Current Prayer Section */}
       <div className="relative overflow-hidden golden-border rounded-3xl p-8 islamic-shadow geometric-pattern glass-morphism">
         {/* Abstract background decorative element */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-islamic-gold-500/10 rounded-full blur-3xl -mr-10 -mt-10" />
+        <div className="absolute top-0 right-0 w-32 h-32 bg-islamic-teal-500/10 rounded-full blur-3xl -mr-10 -mt-10" />
 
         <div className="relative z-10">
           <div className="flex items-center justify-between mb-6">
-            <div className="px-4 py-1 rounded-full bg-islamic-green-500/20 border border-islamic-green-500/30 flex items-center space-x-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-islamic-green-400 animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.8)]" />
-              <span className="text-[10px] uppercase tracking-widest font-bold text-islamic-green-300">Active Now</span>
+            <div className="px-4 py-1 rounded-full bg-islamic-teal-500/20 border border-islamic-teal-500/30 flex items-center space-x-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-islamic-teal-400 animate-pulse shadow-[0_0_8px_rgba(20,184,166,0.8)]" />
+              <span className="text-[10px] uppercase tracking-widest font-bold text-islamic-teal-300">Active Now</span>
             </div>
-            <Bell className="w-5 h-5 text-islamic-gold-400 opacity-60" />
+            <Bell className="w-5 h-5 text-islamic-teal-400 opacity-60" />
           </div>
 
           <div className="flex flex-col items-center justify-center text-center space-y-4">
             <h2 className="text-4xl font-bold tracking-tight islamic-title text-white">
               {currentPrayer?.name}
             </h2>
-            <div className="text-5xl font-extrabold text-islamic-gold-300 drop-shadow-lg tracking-tight">
+            <div className="text-5xl font-extrabold text-islamic-teal-300 drop-shadow-lg tracking-tight">
               {currentPrayer?.time}
             </div>
 
             <div className="py-4 flex flex-col items-center">
-              <div className="text-[10px] uppercase tracking-[0.3em] text-islamic-gold-500 font-bold mb-2">Next Prayer In</div>
+              <div className="text-[10px] uppercase tracking-[0.3em] text-islamic-teal-500 font-bold mb-2">Next Prayer In</div>
               <div className="text-3xl font-mono font-bold text-white tabular-nums">
                 {formatTimeDisplay(timeLeft)}
               </div>
@@ -224,11 +224,11 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
 
             <div className="grid grid-cols-2 gap-4 w-full pt-4 border-t border-white/5">
               <div className="flex flex-col items-center p-3 rounded-2xl bg-white/5 border border-white/5">
-                <span className="text-[9px] uppercase tracking-widest text-islamic-gold-400 font-bold mb-1">Suhur</span>
+                <span className="text-[9px] uppercase tracking-widest text-islamic-teal-400 font-bold mb-1">Suhur</span>
                 <span className="text-sm font-bold">04:27 AM</span>
               </div>
               <div className="flex flex-col items-center p-3 rounded-2xl bg-white/5 border border-white/5">
-                <span className="text-[9px] uppercase tracking-widest text-islamic-gold-400 font-bold mb-1">Iftar</span>
+                <span className="text-[9px] uppercase tracking-widest text-islamic-teal-400 font-bold mb-1">Iftar</span>
                 <span className="text-sm font-bold">06:05 PM</span>
               </div>
             </div>
@@ -236,21 +236,20 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
         </div>
       </div>
 
-      {/* Prayer Times List */}
       <div className="grid grid-cols-1 gap-3">
         {prayerTimes.map((prayer, index) => (
           <div
             key={prayer.name}
             className={`flex items-center justify-between p-5 rounded-2xl transition-all duration-300 card-hover ${prayer.isCurrent
-                ? 'bg-islamic-gold-500/10 border border-islamic-gold-500/30 shadow-[0_0_20px_rgba(212,175,55,0.1)]'
-                : 'bg-islamic-deep-800/40 border border-white/5'
+                ? 'bg-islamic-teal-500/10 border border-islamic-teal-500/30 shadow-[0_0_20px_rgba(20,184,166,0.1)]'
+                : 'bg-islamic-deep-900/40 border border-white/5'
               }`}
           >
             <div className="flex items-center space-x-4">
-              <div className={`p-2 rounded-lg ${prayer.isCurrent ? 'bg-islamic-gold-500 text-islamic-deep-900' : 'bg-islamic-deep-700 text-islamic-gold-400'}`}>
+              <div className={`p-2 rounded-lg ${prayer.isCurrent ? 'bg-islamic-teal-500 text-islamic-deep-950' : 'bg-islamic-deep-900 text-islamic-teal-400'}`}>
                 <Clock size={16} />
               </div>
-              <span className={`font-bold tracking-wide ${prayer.isCurrent ? 'text-islamic-gold-300' : 'text-gray-300'}`}>
+              <span className={`font-bold tracking-wide ${prayer.isCurrent ? 'text-islamic-teal-300' : 'text-gray-300'}`}>
                 {prayer.name}
               </span>
             </div>
@@ -259,7 +258,7 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
                 {prayer.time}
               </span>
               {prayer.isCurrent ? (
-                <div className="w-1.5 h-1.5 rounded-full bg-islamic-green-400 shadow-[0_0_8px_rgba(74,222,128,0.8)]" />
+                <div className="w-1.5 h-1.5 rounded-full bg-islamic-teal-400 shadow-[0_0_8px_rgba(20,184,166,0.8)]" />
               ) : (
                 <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
               )}

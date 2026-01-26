@@ -10,10 +10,10 @@ DeenApp's design is inspired by modern digital experiences combined with traditi
 
 The app uses a curated Islamic-themed color palette defined in `tailwind.config.js`:
 
-- **Deep Blue (`islamic-deep`)**: Used for backgrounds and main surfaces, providing a calm and professional feel.
-- **Islamic Green (`islamic-green`)**: Symbolizing life and peace, used for primary actions and highlights.
-- **Gold (`islamic-gold`)**: Used for accents, typography highlights, and "premium" elements, reflecting traditional Islamic art.
-- **Vibrant Blue (`islamic-blue`)**: Used for secondary highlights and gradients.
+- **Islamic Teal (`islamic-teal`)**: The primary brand color, chosen for its professional and eye-friendly qualities. Used for main highlights and active states.
+- **Deep Slate/Dark (`islamic-deep`)**: Used for backgrounds and main surfaces, providing a refined and high-contrast professional feel.
+- **Gold (`islamic-gold`)**: Used sparingly for accents and decorative elements.
+- **Vibrant Blue (`islamic-blue`)**: Used for secondary highlights.
 
 ## Typography
 

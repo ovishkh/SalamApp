@@ -21,6 +21,8 @@ The project follows a standard Next.js directory structure:
 - **FeatureGrid**: A responsive grid containing links to various app features (Quran, Hadith, Qibla, etc.).
 - **PrayerTracker**: Allows users to track their daily prayer performance locally.
 - **DailyAyah**: Displays an inspirational verse from the Quran.
+- **SunnahPractices**: A checklist of daily Sunnah practices for users to track.
+- **HalalFinder**: A tool to find Halal restaurants and cuisines nearby.
 - **LocationToggle**: Provides a way for users to switch between predefined locations to update prayer times.
 
 ## Data Flow

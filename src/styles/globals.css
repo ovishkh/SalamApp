@@ -22,7 +22,7 @@ body {
 
 body {
   color: white;
-  background: linear-gradient(135deg, #0a1b2e 0%, #1a365d 50%, #2d5a87 100%);
+  background: radial-gradient(circle at top left, #0a1b1a 0%, #0a0f0e 50%, #050a09 100%);
   min-height: 100vh;
 }
 
@@ -43,16 +43,16 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: #0a0f0e;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: #134e4a;
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
+  background: #14b8a6;
 }
 
 /* Animation classes */
@@ -65,8 +65,8 @@ a {
 }
 
 /* Islamic Color Palette */
-.islamic-green {
-  background: linear-gradient(135deg, #0d6b3a 0%, #1a7f3e 100%);
+.islamic-teal {
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
 }
 
 .islamic-gold {
@@ -74,26 +74,27 @@ a {
 }
 
 .islamic-blue {
-  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  background: linear-gradient(135deg, #0e7490 0%, #06b6d4 100%);
 }
 
-.islamic-deep-blue {
-  background: linear-gradient(135deg, #0a1b2e 0%, #1a365d 100%);
+.islamic-deep-teal {
+  background: linear-gradient(135deg, #0a1b1a 0%, #0a0f0e 100%);
 }
 
 /* Custom gradient backgrounds */
 .gradient-primary {
-  background: linear-gradient(135deg, #0d6b3a 0%, #1a7f3e 100%);
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
 }
 
 .gradient-dark {
-  background: linear-gradient(135deg, #0a1b2e 0%, #1a365d 50%, #2d5a87 100%);
+  background: radial-gradient(circle at top left, #0a1b1a 0%, #0a0f0e 50%, #050a09 100%);
 }
 
 .gradient-card {
-  background: linear-gradient(135deg, rgba(26, 54, 93, 0.8) 0%, rgba(45, 90, 135, 0.6) 100%);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.05) 0%, rgba(15, 118, 110, 0.02) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Islamic Typography */
@@ -109,60 +110,60 @@ a {
 
 /* Islamic Patterns */
 .islamic-pattern {
-  background-image: 
-    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(13, 107, 58, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.05) 0%, transparent 60%);
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(20, 184, 166, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(13, 78, 74, 0.02) 0%, transparent 60%);
   background-attachment: fixed;
 }
 
 .geometric-pattern {
   background-color: transparent;
-  background-image: radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-image: radial-gradient(circle at center, rgba(20, 184, 166, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 .islamic-border {
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(20, 184, 166, 0.2);
+  box-shadow: 0 0 15px rgba(20, 184, 166, 0.05);
 }
 
 .glass-morphism {
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  background: rgba(10, 15, 14, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
 }
 
 .golden-border {
   border: 1px solid transparent;
-  background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)) padding-box,
-              linear-gradient(135deg, #d4af37 0%, #f4d03f 100%) border-box;
+  background: linear-gradient(rgba(10, 15, 14, 0.9), rgba(10, 15, 14, 0.9)) padding-box,
+    linear-gradient(135deg, #14b8a6 0%, #d4af37 100%) border-box;
 }
 
 /* Islamic Shadows and Effects */
 .islamic-shadow {
-  box-shadow: 
-    0 10px 25px -5px rgba(0, 0, 0, 0.3),
-    0 8px 10px -6px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 10px 30px -5px rgba(0, 0, 0, 0.6),
+    0 8px 12px -6px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.teal-glow {
+  box-shadow: 0 0 20px rgba(20, 184, 166, 0.2), inset 0 0 10px rgba(20, 184, 166, 0.1);
 }
 
 .golden-glow {
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3), inset 0 0 5px rgba(212, 175, 55, 0.2);
-}
-
-.green-glow {
-  box-shadow: 0 0 15px rgba(13, 107, 58, 0.3), inset 0 0 5px rgba(13, 107, 58, 0.2);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2), inset 0 0 5px rgba(212, 175, 55, 0.1);
 }
 
 .card-hover {
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .card-hover:hover {
-  transform: translateY(-4px);
-  border-color: rgba(212, 175, 55, 0.5);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 15px rgba(212, 175, 55, 0.2);
+  transform: translateY(-6px);
+  border-color: rgba(20, 184, 166, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 20px rgba(20, 184, 166, 0.15);
 }
