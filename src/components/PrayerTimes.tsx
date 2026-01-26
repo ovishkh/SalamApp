@@ -40,17 +40,17 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
     try {
       setLoading(true);
       const response = await fetch(`/api/prayer-times?city=${location.name}&country=${location.country}&lat=${location.coordinates.lat}&lng=${location.coordinates.lng}`);
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const data = await response.json();
-      
+
       if (data.error) {
         throw new Error(data.error);
       }
-      
+
       setPrayerTimesData(data);
       setLoading(false);
     } catch (error) {
@@ -75,7 +75,7 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
 
     const now = new Date();
     const today = now.toDateString();
-    
+
     const prayers = [
       { name: 'Fajr', time: new Date(`${today} ${prayerTimesData.fajr}`) },
       { name: 'Dhuhr', time: new Date(`${today} ${prayerTimesData.dhuhr}`) },
@@ -92,7 +92,7 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
         const hours = Math.floor(timeDiff / (1000 * 60 * 60));
         const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-        
+
         setTimeLeft({ hours, minutes, seconds, totalMinutes: Math.floor(timeDiff / (1000 * 60)) });
       }
     } else {
@@ -100,14 +100,14 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
       const tomorrow = new Date(now);
       tomorrow.setDate(tomorrow.getDate() + 1);
       const tomorrowStr = tomorrow.toDateString();
-      
+
       const firstPrayerTomorrow = new Date(`${tomorrowStr} ${prayerTimesData.fajr}`);
       const timeDiff = firstPrayerTomorrow.getTime() - now.getTime();
-      
+
       const hours = Math.floor(timeDiff / (1000 * 60 * 60));
       const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-      
+
       setTimeLeft({ hours, minutes, seconds, totalMinutes: Math.floor(timeDiff / (1000 * 60)) });
     }
   };
@@ -141,10 +141,10 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
 
   const getCurrentPrayer = () => {
     if (!prayerTimesData) return null;
-    
+
     const now = new Date();
     const today = now.toDateString();
-    
+
     const prayers = [
       { name: 'Fajr', time: new Date(`${today} ${prayerTimesData.fajr}`) },
       { name: 'Dhuhr', time: new Date(`${today} ${prayerTimesData.dhuhr}`) },
@@ -192,89 +192,80 @@ const PrayerTimes: React.FC<PrayerTimesProps> = ({ location }) => {
   };
 
   return (
-    <div className="px-4 py-6">
+    <div className="space-y-6">
       {/* Current Prayer Section */}
-      <div className="gradient-card rounded-2xl p-6 mb-6 islamic-shadow geometric-pattern">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-2">
-            <Bell className="w-5 h-5 text-islamic-gold-400 golden-glow" />
-            <span className="text-sm text-islamic-gold-200">Now :</span>
-            <span className="text-lg font-semibold text-white islamic-title">
+      <div className="relative overflow-hidden golden-border rounded-3xl p-8 islamic-shadow geometric-pattern glass-morphism">
+        {/* Abstract background decorative element */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-islamic-gold-500/10 rounded-full blur-3xl -mr-10 -mt-10" />
+
+        <div className="relative z-10">
+          <div className="flex items-center justify-between mb-6">
+            <div className="px-4 py-1 rounded-full bg-islamic-green-500/20 border border-islamic-green-500/30 flex items-center space-x-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-islamic-green-400 animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.8)]" />
+              <span className="text-[10px] uppercase tracking-widest font-bold text-islamic-green-300">Active Now</span>
+            </div>
+            <Bell className="w-5 h-5 text-islamic-gold-400 opacity-60" />
+          </div>
+
+          <div className="flex flex-col items-center justify-center text-center space-y-4">
+            <h2 className="text-4xl font-bold tracking-tight islamic-title text-white">
               {currentPrayer?.name}
-            </span>
-            <div className="w-2 h-2 bg-islamic-green-400 rounded-full green-glow"></div>
-          </div>
-        </div>
+            </h2>
+            <div className="text-5xl font-extrabold text-islamic-gold-300 drop-shadow-lg tracking-tight">
+              {currentPrayer?.time}
+            </div>
 
-        <div className="flex justify-between items-start mb-4">
-          <div className="space-y-2">
-            <div className="text-2xl font-bold text-white islamic-title">
-              {currentPrayer?.time} (Start time)
-            </div>
-            <div className="text-sm text-islamic-gold-200">
-              {formatTimeLeft(timeLeft)}
-            </div>
-            <div className="text-sm text-islamic-gold-200">
-              Suhur: 4:27 AM
-            </div>
-            <div className="text-sm text-islamic-gold-200">
-              Iftar: 6:05 PM
-            </div>
-          </div>
-
-          {/* Circular Progress */}
-          <div className="relative w-24 h-24">
-            <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
-              {/* Background circle */}
-              <circle
-                cx="50"
-                cy="50"
-                r="40"
-                stroke="currentColor"
-                strokeWidth="8"
-                fill="none"
-                className="text-islamic-deep-700"
-              />
-              {/* Progress circle */}
-              <circle
-                cx="50"
-                cy="50"
-                r="40"
-                stroke="currentColor"
-                strokeWidth="8"
-                fill="none"
-                strokeDasharray={`${2 * Math.PI * 40}`}
-                strokeDashoffset={`${2 * Math.PI * 40 * (1 - calculateProgress() / 100)}`}
-                className="text-islamic-gold-400"
-                strokeLinecap="round"
-              />
-            </svg>
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <div className="text-xs text-islamic-gold-300">Time</div>
-              <div className="text-sm font-bold text-white islamic-title">
+            <div className="py-4 flex flex-col items-center">
+              <div className="text-[10px] uppercase tracking-[0.3em] text-islamic-gold-500 font-bold mb-2">Next Prayer In</div>
+              <div className="text-3xl font-mono font-bold text-white tabular-nums">
                 {formatTimeDisplay(timeLeft)}
               </div>
-              <div className="text-xs text-islamic-gold-300">Left</div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 w-full pt-4 border-t border-white/5">
+              <div className="flex flex-col items-center p-3 rounded-2xl bg-white/5 border border-white/5">
+                <span className="text-[9px] uppercase tracking-widest text-islamic-gold-400 font-bold mb-1">Suhur</span>
+                <span className="text-sm font-bold">04:27 AM</span>
+              </div>
+              <div className="flex flex-col items-center p-3 rounded-2xl bg-white/5 border border-white/5">
+                <span className="text-[9px] uppercase tracking-widest text-islamic-gold-400 font-bold mb-1">Iftar</span>
+                <span className="text-sm font-bold">06:05 PM</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Prayer Times List */}
-      <div className="gradient-card rounded-2xl p-4 mb-6 islamic-shadow">
-        <div className="flex justify-between items-center">
-          {prayerTimes.map((prayer, index) => (
-            <div key={prayer.name} className="flex flex-col items-center space-y-2">
-              <div className={`w-2 h-2 rounded-full ${
-                prayer.isCurrent ? 'bg-islamic-gold-400 golden-glow' : 'bg-islamic-deep-500'
-              }`} />
-              <div className="text-center">
-                <div className="text-xs text-islamic-gold-200">{prayer.name}</div>
-                <div className="text-sm font-semibold text-white islamic-title">{prayer.time}</div>
+      <div className="grid grid-cols-1 gap-3">
+        {prayerTimes.map((prayer, index) => (
+          <div
+            key={prayer.name}
+            className={`flex items-center justify-between p-5 rounded-2xl transition-all duration-300 card-hover ${prayer.isCurrent
+                ? 'bg-islamic-gold-500/10 border border-islamic-gold-500/30 shadow-[0_0_20px_rgba(212,175,55,0.1)]'
+                : 'bg-islamic-deep-800/40 border border-white/5'
+              }`}
+          >
+            <div className="flex items-center space-x-4">
+              <div className={`p-2 rounded-lg ${prayer.isCurrent ? 'bg-islamic-gold-500 text-islamic-deep-900' : 'bg-islamic-deep-700 text-islamic-gold-400'}`}>
+                <Clock size={16} />
               </div>
+              <span className={`font-bold tracking-wide ${prayer.isCurrent ? 'text-islamic-gold-300' : 'text-gray-300'}`}>
+                {prayer.name}
+              </span>
             </div>
-          ))}
-        </div>
+            <div className="flex items-center space-x-3">
+              <span className={`text-lg font-bold tabular-nums ${prayer.isCurrent ? 'text-white' : 'text-gray-400'}`}>
+                {prayer.time}
+              </span>
+              {prayer.isCurrent ? (
+                <div className="w-1.5 h-1.5 rounded-full bg-islamic-green-400 shadow-[0_0_8px_rgba(74,222,128,0.8)]" />
+              ) : (
+                <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

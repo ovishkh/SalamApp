@@ -10,23 +10,34 @@ const DailyAyah: React.FC = () => {
   };
 
   return (
-    <div className="px-4 mb-6">
-      <div className="gradient-card rounded-2xl p-6 islamic-shadow geometric-pattern">
-        <div className="flex items-start space-x-4">
-          <div className="flex-shrink-0">
-            <Quote className="w-8 h-8 text-islamic-gold-400 golden-glow" />
-          </div>
-          
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold text-white mb-2 islamic-title">Daily Ayah</h3>
-            <p className="text-islamic-gold-200 text-sm leading-relaxed mb-3">
-              {dailyAyah.text}
-            </p>
-            <div className="text-right">
-              <span className="text-islamic-gold-400 text-sm font-medium arabic-text">
+    <div className="px-4 py-6">
+      <div className="flex items-center justify-between mb-4 px-1">
+        <h3 className="text-[10px] uppercase tracking-[0.3em] text-islamic-gold-500 font-bold">Daily Revelation</h3>
+        <div className="h-[1px] flex-1 bg-gradient-to-r from-islamic-gold-500/30 to-transparent ml-4" />
+      </div>
+
+      <div className="relative overflow-hidden glass-morphism rounded-3xl p-8 islamic-shadow geometric-pattern">
+        {/* Background decorative element */}
+        <div className="absolute top-0 left-0 w-24 h-24 bg-islamic-gold-500/5 rounded-full blur-2xl -ml-12 -mt-12" />
+
+        <div className="relative z-10 flex flex-col items-center text-center">
+          <Quote className="w-8 h-8 text-islamic-gold-400/40 mb-6" />
+
+          <p className="text-xl font-medium text-white leading-relaxed mb-6 italic font-serif">
+            "{dailyAyah.text}"
+          </p>
+
+          <div className="flex items-center space-x-4">
+            <div className="h-[1px] w-8 bg-islamic-gold-500/30" />
+            <div className="flex flex-col">
+              <span className="text-sm font-bold text-islamic-gold-300 tracking-wider">
+                {dailyAyah.surah}
+              </span>
+              <span className="text-[10px] uppercase tracking-widest text-islamic-gold-500 font-bold">
                 {dailyAyah.reference}
               </span>
             </div>
+            <div className="h-[1px] w-8 bg-islamic-gold-500/30" />
           </div>
         </div>
       </div>

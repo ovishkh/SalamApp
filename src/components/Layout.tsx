@@ -63,47 +63,68 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage = 'home' }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-dark text-white islamic-pattern">
+    <div className="min-h-screen bg-gradient-dark text-white islamic-pattern font-sans">
       {/* Status Bar */}
-      <div className="flex justify-between items-center px-4 py-3 text-sm bg-gradient-to-r from-islamic-deep-900/50 to-islamic-blue-900/50 backdrop-blur-sm border-b border-islamic-gold-500/20">
-        <span className="font-medium text-islamic-gold-300">{formatTime(currentTime)}</span>
-        <div className="text-xs text-islamic-gold-200 arabic-text">
-          {hijriDate || 'Loading...'}
+      <div className="sticky top-0 z-50">
+        <div className="flex justify-between items-center px-6 py-2 text-xs bg-islamic-deep-900/80 backdrop-blur-md border-b border-islamic-gold-500/10">
+          <div className="flex items-center space-x-2">
+            <span className="w-2 h-2 rounded-full bg-islamic-green-500 animate-pulse" />
+            <span className="font-semibold text-islamic-gold-200 tracking-wider transition-all duration-500 group-hover:text-white">
+              {formatTime(currentTime)}
+            </span>
+          </div>
+          <div className="text-sm font-arabic text-islamic-gold-300">
+            {hijriDate || 'Loading...'}
+          </div>
+        </div>
+
+        {/* Header */}
+        <div className="flex justify-between items-center px-6 py-4 bg-islamic-deep-900/40 backdrop-blur-sm border-b border-white/5">
+          <div className="flex flex-col">
+            <span className="text-[10px] uppercase tracking-[0.2em] text-islamic-gold-500/80 font-bold">Current Date</span>
+            <span className="text-sm text-islamic-gold-100 font-medium">{formatDate(currentTime)}</span>
+          </div>
+          <div className="flex flex-col items-end">
+            <span className="text-[10px] uppercase tracking-[0.2em] text-islamic-gold-500/80 font-bold">Location</span>
+            <span className="text-sm text-islamic-gold-100 font-medium">Dhaka, BD</span>
+          </div>
         </div>
       </div>
 
-      {/* Header */}
-      <div className="flex justify-between items-center px-4 py-3 text-sm bg-gradient-to-r from-islamic-green-900/30 to-islamic-blue-900/30 backdrop-blur-sm border-b border-islamic-green-500/20">
-        <span className="text-islamic-gold-200">{formatDate(currentTime)}</span>
-        <span className="text-islamic-gold-200 font-medium">Dhaka</span>
-      </div>
-
       {/* Main Content */}
-      <main className="flex-1 pb-20">
+      <main className="flex-1 pb-24 px-4 pt-4">
         {children}
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-islamic-deep-900 to-islamic-blue-900/80 backdrop-blur-lg border-t border-islamic-gold-500/30 islamic-shadow">
-        <div className="flex justify-around py-3">
-          {navigationItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = currentPage === item.id;
-            
-            return (
-              <button
-                key={item.id}
-                className={`flex flex-col items-center space-y-1 py-2 px-3 rounded-lg transition-all duration-300 ${
-                  isActive 
-                    ? 'text-islamic-gold-300 golden-glow bg-islamic-green-800/30' 
-                    : 'text-islamic-gold-200 hover:text-islamic-gold-300 hover:bg-islamic-green-800/20'
-                }`}
-              >
-                <Icon size={20} />
-                <span className="text-xs font-medium">{item.label}</span>
-              </button>
-            );
-          })}
+      <nav className="fixed bottom-6 left-4 right-4 z-50">
+        <div className="mx-auto max-w-md glass-morphism rounded-2xl border border-white/10 p-2">
+          <div className="flex justify-around items-center">
+            {navigationItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = currentPage === item.id;
+              
+              return (
+                <button
+                  key={item.id}
+                  className={`relative flex flex-col items-center py-2 px-4 rounded-xl transition-all duration-300 ${
+                    isActive 
+                      ? 'text-islamic-gold-300' 
+                      : 'text-gray-400 hover:text-islamic-gold-200 hover:bg-white/5'
+                  }`}
+                >
+                  {isActive && (
+                    <span className="absolute inset-0 bg-islamic-gold-500/10 rounded-xl blur-sm" />
+                  )}
+                  <Icon size={20} className={`relative z-10 transition-transform duration-300 ${isActive ? 'scale-110' : 'scale-100'}`} />
+                  <span className="relative z-10 text-[10px] font-bold mt-1 uppercase tracking-wider">{item.label}</span>
+                  {isActive && (
+                    <span className="absolute -bottom-1 w-1 h-1 bg-islamic-gold-400 rounded-full shadow-[0_0_8px_rgba(212,175,55,0.8)]" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </nav>
     </div>

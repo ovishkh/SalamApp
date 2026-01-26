@@ -1,12 +1,12 @@
 import React from 'react';
-import { 
-  Clock, 
-  BookOpen, 
-  Book, 
-  Hand, 
-  Compass, 
-  CircleDot, 
-  DollarSign, 
+import {
+  Clock,
+  BookOpen,
+  Book,
+  Hand,
+  Compass,
+  CircleDot,
+  DollarSign,
   Calendar,
   Users,
   Building,
@@ -50,20 +50,28 @@ const FeatureGrid: React.FC = () => {
   };
 
   return (
-    <div className="px-4 mb-6">
-      <div className="grid grid-cols-4 gap-4">
+    <div className="px-4 py-8">
+      <div className="flex items-center justify-between mb-6 px-1">
+        <h3 className="text-[10px] uppercase tracking-[0.3em] text-islamic-gold-500 font-bold">Services & Learning</h3>
+        <div className="h-[1px] flex-1 bg-gradient-to-r from-islamic-gold-500/30 to-transparent ml-4" />
+      </div>
+
+      <div className="grid grid-cols-3 gap-4">
         {features.map((feature) => {
           const IconComponent = getIcon(feature.icon);
-          
+
           return (
             <button
               key={feature.id}
-              className="flex flex-col items-center space-y-2 p-4 gradient-card rounded-2xl hover:bg-opacity-80 transition-all duration-300 islamic-shadow hover:golden-glow group"
+              className="flex flex-col items-center justify-center space-y-3 p-5 glass-morphism rounded-2xl transition-all duration-300 card-hover group"
             >
-              <div className="w-12 h-12 bg-gradient-to-br from-islamic-green-600 to-islamic-green-700 rounded-full flex items-center justify-center group-hover:from-islamic-gold-500 group-hover:to-islamic-gold-600 transition-all duration-300">
-                <IconComponent className="w-6 h-6 text-white" />
+              <div className="relative">
+                <div className="absolute inset-0 bg-islamic-gold-500/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative w-14 h-14 bg-islamic-deep-900 border border-white/5 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:border-islamic-gold-500/50 group-hover:-translate-y-1">
+                  <IconComponent className="w-6 h-6 text-islamic-gold-300 group-hover:text-islamic-gold-100 transition-colors duration-300" />
+                </div>
               </div>
-              <span className="text-xs text-center text-islamic-gold-200 font-medium group-hover:text-white transition-colors duration-300">
+              <span className="text-[10px] text-center text-gray-400 font-bold uppercase tracking-widest group-hover:text-islamic-gold-200 transition-colors duration-300">
                 {feature.name}
               </span>
             </button>

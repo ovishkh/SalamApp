@@ -3,6 +3,10 @@
 ## Overview
 DeenApp is a comprehensive Next.js Islamic application designed to provide Muslims with essential tools for daily worship and learning. The app features prayer times, Quran reading, Hadith collection, Dua library, Qibla direction, and much more in a beautiful, modern interface.
 
+### 📖 Documentation
+- [Architecture Overview](docs/architecture.md)
+- [UI Design Guide](docs/ui-guide.md)
+
 ## Features
 
 ### 🕌 Core Features

@@ -31,41 +31,57 @@ const LocationToggle: React.FC<LocationToggleProps> = ({ onLocationChange }) => 
   };
 
   return (
-    <div className="px-4 mb-4">
+    <div className="px-4 py-4">
       <div className="relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center justify-between w-full gradient-card rounded-xl p-3 hover:bg-opacity-80 transition-all duration-300 islamic-shadow hover:golden-glow"
+          className="flex items-center justify-between w-full glass-morphism rounded-2xl p-4 transition-all duration-300 card-hover border border-white/5"
         >
-          <div className="flex items-center space-x-2">
-            <MapPin className="w-4 h-4 text-islamic-gold-400" />
-            <span className="text-white font-medium islamic-title">{selectedLocation.name}</span>
-            <span className="text-islamic-gold-200 text-sm">({selectedLocation.country})</span>
+          <div className="flex items-center space-x-3">
+            <div className="bg-islamic-gold-500/10 p-2 rounded-lg">
+              <MapPin className="w-4 h-4 text-islamic-gold-400" />
+            </div>
+            <div className="flex flex-col items-start">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-islamic-gold-500 font-bold">Auto Location</span>
+              <div className="flex items-center space-x-2">
+                <span className="text-white font-bold tracking-wide">{selectedLocation.name}</span>
+                <span className="text-gray-500 text-xs font-medium">({selectedLocation.country})</span>
+              </div>
+            </div>
           </div>
-          <ChevronDown className={`w-4 h-4 text-islamic-gold-300 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+          <div className={`p-2 rounded-full transition-all duration-300 ${isOpen ? 'bg-islamic-gold-500 text-islamic-deep-900 rotate-180' : 'bg-white/5 text-islamic-gold-400'}`}>
+            <ChevronDown size={14} />
+          </div>
         </button>
 
         {isOpen && (
-          <div className="absolute top-full left-0 right-0 mt-2 bg-gradient-to-b from-islamic-deep-900 to-islamic-blue-900 rounded-xl border border-islamic-gold-500/30 shadow-lg z-50 max-h-60 overflow-y-auto islamic-shadow">
-            {locations.map((location) => (
-              <button
-                key={`${location.name}-${location.country}`}
-                onClick={() => handleLocationSelect(location)}
-                className={`w-full text-left px-4 py-3 hover:bg-islamic-green-800/20 transition-colors duration-300 ${
-                  selectedLocation.name === location.name ? 'bg-islamic-green-800/30' : ''
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-white font-medium islamic-title">{location.name}</div>
-                    <div className="text-islamic-gold-200 text-sm">{location.country}</div>
+          <div className="absolute top-full left-0 right-0 mt-4 glass-morphism rounded-3xl border border-white/10 shadow-2xl z-[100] max-h-80 overflow-y-auto no-scrollbar animate-in fade-in slide-in-from-top-4 duration-300">
+            <div className="p-2 space-y-1">
+              <div className="px-4 py-2">
+                <span className="text-[10px] uppercase tracking-[0.3em] text-islamic-gold-500/60 font-bold">Select City</span>
+              </div>
+              {locations.map((location) => (
+                <button
+                  key={`${location.name}-${location.country}`}
+                  onClick={() => handleLocationSelect(location)}
+                  className={`w-full text-left px-4 py-4 rounded-2xl transition-all duration-300 flex items-center justify-between group ${selectedLocation.name === location.name
+                      ? 'bg-islamic-gold-500/10 border border-islamic-gold-500/20'
+                      : 'hover:bg-white/5'
+                    }`}
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${selectedLocation.name === location.name ? 'bg-islamic-gold-400 scale-150 shadow-[0_0_8px_rgba(212,175,55,0.8)]' : 'bg-gray-700'}`} />
+                    <div className="flex flex-col">
+                      <div className={`font-bold tracking-wide ${selectedLocation.name === location.name ? 'text-islamic-gold-300' : 'text-gray-300 group-hover:text-white'}`}>{location.name}</div>
+                      <div className="text-gray-500 text-[10px] font-medium uppercase tracking-widest">{location.country}</div>
+                    </div>
                   </div>
                   {selectedLocation.name === location.name && (
-                    <div className="w-2 h-2 bg-islamic-gold-400 rounded-full golden-glow"></div>
+                    <div className="px-2 py-0.5 rounded-full bg-islamic-gold-500/20 text-islamic-gold-300 text-[8px] font-bold uppercase tracking-tighter">Current</div>
                   )}
-                </div>
-              </button>
-            ))}
+                </button>
+              ))}
+            </div>
           </div>
         )}
       </div>
