@@ -7,6 +7,12 @@ DeenApp is a comprehensive Next.js Islamic application designed to provide Musli
 - [Architecture Overview](docs/architecture.md)
 - [UI Design Guide](docs/ui-guide.md)
 
+## 📱 Mobile Application (SalamApp)
+The project now includes a companion mobile application built with **Expo** and **React Native**.
+- **Location**: `mobile/`
+- **Features**: Native performance, push notifications, and mobile-optimized Islamic tools.
+- **Tech Stack**: Expo Router, React Native Reanimated, TypeScript.
+
 ## Features
 
 ### 🕌 Core Features
@@ -32,7 +38,11 @@ DeenApp is a comprehensive Next.js Islamic application designed to provide Musli
 ## Project Structure
 ```
 DeenApp/
-├── src/
+├── mobile/                  # SalamApp (Expo/React Native)
+│   ├── app/                 # Expo Router screens
+│   ├── components/          # Native components
+│   └── package.json         # Mobile dependencies
+├── src/                     # Web Application (Next.js)
 │   ├── components/          # Reusable React components
 │   │   ├── Layout.tsx       # Main app layout with navigation
 │   │   ├── PrayerTimes.tsx  # Prayer times display and countdown
@@ -42,14 +52,10 @@ DeenApp/
 │   │   └── LocationToggle.tsx # Location selection
 │   ├── pages/
 │   │   └── index.tsx        # Main homepage
-│   ├── styles/
-│   │   └── globals.css      # Global styles and Tailwind imports
 │   └── types/
 │       └── index.ts         # TypeScript type definitions
-├── package.json             # Dependencies and scripts
+├── package.json             # Web dependencies
 ├── tailwind.config.js       # Tailwind CSS configuration
-├── postcss.config.js        # PostCSS configuration
-├── tsconfig.json            # TypeScript configuration
 └── README.md                # Project documentation
 ```
 
@@ -81,6 +87,23 @@ DeenApp/
 
 4. **Open your browser**
    Navigate to `http://localhost:3000` to view the application.
+
+### Mobile App Setup (SalamApp)
+
+1. **Navigate to the mobile directory**
+   ```bash
+   cd mobile
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start Expo**
+   ```bash
+   npx expo start
+   ```
 
 ## Usage Guidelines
 
